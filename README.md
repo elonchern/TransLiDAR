@@ -6,9 +6,9 @@ TransLiDAR is a cross-sensor point cloud translation dataset designed to bridge 
 
 ## 图示信息
 
-- **图1：** 数据集文件结构  
-  *Figure 1: Dataset directory structure*
-
+- **Dataset directory structure** 
+- ![figure_1：Dataset directory structur](figures/fig1.jpg)
+  
 - **图2：** 地理配准位姿叠加在 CQUPT 地图上  
   *Figure 2: Georegistered poses overlaid on CQUPTMap*
 
