@@ -1,0 +1,159 @@
+{
+    "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.17",
+    "python": "3.8.16",
+    "heartbeatAt": "2025-07-09T13:14:49.109111",
+    "startedAt": "2025-07-09T13:14:48.910727",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--batch_size",
+        "8",
+        "--epochs",
+        "600",
+        "--num_workers",
+        "0",
+        "--lr",
+        "5e-4",
+        "--weight_decay",
+        "0.01",
+        "--warmup_epochs",
+        "60",
+        "--model_select",
+        "tulip_base",
+        "--pixel_shuffle",
+        "--circular_padding",
+        "--log_transform",
+        "--patch_unmerging",
+        "--dataset_select",
+        "kitti",
+        "--data_path_low_res",
+        "/data/elon/TransLiDAR_bin/",
+        "--data_path_high_res",
+        "/data/elon/TransLiDAR_bin/",
+        "--run_name",
+        "tulip_base",
+        "--entity",
+        "myentity",
+        "--project_name",
+        "experiment_kitti",
+        "--output_dir",
+        "./experiment/kitti/tulip_base",
+        "--img_size_low_res",
+        "64",
+        "256",
+        "--img_size_high_res",
+        "64",
+        "256",
+        "--window_size",
+        "2",
+        "8",
+        "--patch_size",
+        "4",
+        "4",
+        "--in_chans",
+        "1"
+    ],
+    "state": "running",
+    "program": "/home/elon/Projects/TransLiDAR/transLiDAR/main_lidar_translation.py",
+    "codePathLocal": "transLiDAR/main_lidar_translation.py",
+    "codePath": "transLiDAR/main_lidar_translation.py",
+    "git": {
+        "remote": "https://elonchern:@github.com/elonchern/TransLiDAR.git",
+        "commit": "d796f1325cca14c9dd537d9b3f96864462d1c810"
+    },
+    "email": "elonc@foxmail.com",
+    "root": "/home/elon/Projects/TransLiDAR",
+    "host": "cqupt-Server",
+    "username": "elon",
+    "executable": "/home/elon/.conda/envs/elon/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2172.891166666667,
+        "min": 1200.0,
+        "max": 4600.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1427.007,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4600.0
+        },
+        {
+            "current": 3583.715,
+            "min": 1200.0,
+            "max": 4600.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 937.3305015563965,
+            "used": 881.8005142211914
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_count": 2,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 3090",
+            "memory_total": 25769803776
+        },
+        {
+            "name": "NVIDIA GeForce RTX 3090",
+            "memory_total": 25769803776
+        }
+    ],
+    "memory": {
+        "total": 62.50947570800781
+    }
+}

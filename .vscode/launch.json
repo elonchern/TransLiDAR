@@ -1,0 +1,41 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python 调试程序: 包含参数的当前文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "--batch_size", "8",
+                "--epochs", "600",
+                "--num_workers", "0",
+                "--lr", "5e-4",
+                "--weight_decay", "0.01",
+                "--warmup_epochs", "60",
+                "--model_select", "tulip_base",
+                "--pixel_shuffle",
+                "--circular_padding",
+                "--log_transform",
+                "--patch_unmerging",
+                "--dataset_select", "kitti",
+                "--data_path_low_res", "/data/elon/TransLiDAR_bin/",
+                "--data_path_high_res", "/data/elon/TransLiDAR_bin/",
+                "--run_name", "tulip_base",
+                "--entity", "myentity",
+                "--project_name", "experiment_kitti",
+                "--output_dir", "./experiment/kitti/tulip_base",
+                "--img_size_low_res", "64", "256",
+                "--img_size_high_res", "64", "256",
+                "--window_size", "2", "8",
+                "--patch_size", "4", "4",
+                "--in_chans", "1"
+            ],
+            "justMyCode": false
+        }
+    ]
+}

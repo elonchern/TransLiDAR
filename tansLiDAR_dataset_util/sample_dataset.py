@@ -16,20 +16,18 @@ def read_args():
     parser.add_argument("--input_path", type=str , default="/data/xzy/elon/TransLiDAR_bin/")
     parser.add_argument("--output_path_name_train", type = str, default = "train/lidar")
     parser.add_argument("--output_path_name_val", type = str, default = "val/lidar")
-    # parser.add_argument("--output_path_label_train", type = str, default = "train/label_array")
-    # parser.add_argument("--output_path_label_val", type = str, default = "val/label_array")
     parser.add_argument("--create_val", action='store_true', default=True)
    
     return parser.parse_args()
 
 
-def create_range_map(points_array, label_lidar, image_rows_full, image_cols, ang_start_y, ang_res_y, ang_res_x, max_range, min_range):
+def create_range_map(points_array, image_rows_full, image_cols, ang_start_y, ang_res_y, ang_res_x, max_range, min_range):
     range_image = np.zeros((image_rows_full, image_cols, 1), dtype=np.float32)
-    label_map = np.zeros((image_rows_full, image_cols, 1), dtype=np.float32)
+    intensity_map = np.zeros((image_rows_full, image_cols, 1), dtype=np.float32)
     x = points_array[:,0]
     y = points_array[:,1]
     z = points_array[:,2]
-    label = label_lidar
+    # intensity = points_array[:, 3]
     # find row id
 
     vertical_angle = np.arctan2(z, np.sqrt(x * x + y * y)) * 180.0 / np.pi
@@ -49,8 +47,8 @@ def create_range_map(points_array, label_lidar, image_rows_full, image_cols, ang
     thisRange[thisRange < min_range] = 0
 
     # filter Internsity
-    label[thisRange > max_range] = 0
-    label[thisRange < min_range] = 0
+    # intensity[thisRange > max_range] = 0
+    # intensity[thisRange < min_range] = 0
 
 
     valid_scan = (rowId >= 0) & (rowId < image_rows_full) & (colId >= 0) & (colId < image_cols)
@@ -58,14 +56,14 @@ def create_range_map(points_array, label_lidar, image_rows_full, image_cols, ang
     rowId_valid = rowId[valid_scan]
     colId_valid = colId[valid_scan]
     thisRange_valid = thisRange[valid_scan]
-    label_valid = label[valid_scan]
+    # intensity_valid = intensity[valid_scan]
 
     range_image[rowId_valid, colId_valid, :] = thisRange_valid.reshape(-1, 1)
-    label_map[rowId_valid, colId_valid, :] = label_valid.reshape(-1, 1)
+    # intensity_map[rowId_valid, colId_valid, :] = intensity_valid.reshape(-1, 1)
 
-    lidar_data_projected = np.concatenate((range_image, label_map), axis = -1)
+    # lidar_data_projected = np.concatenate((range_image, intensity_map), axis = -1)
 
-    return lidar_data_projected
+    return range_image
 
 
 def load_from_bin(bin_path):
@@ -85,14 +83,10 @@ def main(args):
     num_data_val = args.num_data_val
     dir_name = os.path.dirname(args.input_path)
     output_dir_name_train = os.path.join(dir_name, args.output_path_name_train)
-    # output_dir_label_train = os.path.join(dir_name, args.output_path_label_train)
     pathlib.Path(output_dir_name_train).mkdir(parents=True, exist_ok=True)
-    # pathlib.Path(output_dir_label_train).mkdir(parents=True, exist_ok=True)
     if args.create_val:
         output_dir_name_val = os.path.join(dir_name, args.output_path_name_val)
-        # output_dir_label_val = os.path.join(dir_name, args.output_path_label_val)
         pathlib.Path(output_dir_name_val).mkdir(parents=True, exist_ok=True)
-        # pathlib.Path(output_dir_label_val).mkdir(parents=True, exist_ok=True)
 
     train_split_path = "/userHome/xzy/Projects/elon/TransLiDAR_TULIP/kitti_utils/train_files.txt"
     val_split_path = "/userHome/xzy/Projects/elon/TransLiDAR_TULIP/kitti_utils/val_files.txt"
@@ -142,23 +136,17 @@ def main(args):
     for i, train_data_path in enumerate(train_data):
 
         lidar_data = load_from_bin(train_data_path)
-        label_lidar_path = train_data_path.replace('/lidar/', '/labels_lidar/').replace('.bin', '.npy')
-        label_lidar = np.load(label_lidar_path)
-        # lidar_data = lidar_data[lidar_data[:,2]>-0.4]
-        range_intensity_map = create_range_map(lidar_data,label_lidar, image_rows_full = image_rows, image_cols = image_cols, ang_start_y = ang_start_y, ang_res_y = ang_res_y, ang_res_x = ang_res_x, max_range = max_range, min_range = min_range)
+        range_intensity_map = create_range_map(lidar_data, image_rows_full = image_rows, image_cols = image_cols, ang_start_y = ang_start_y, ang_res_y = ang_res_y, ang_res_x = ang_res_x, max_range = max_range, min_range = min_range)
 
         np.save(os.path.join(output_dir_name_train,'{:08d}.npy'.format(i)), range_intensity_map.astype(np.float32))
-        
 
     if args.create_val:
         for j, val_data_path in enumerate(val_data):
             lidar_data = load_from_bin(val_data_path)
-            label_lidar_path = val_data_path.replace('/lidar/', '/labels_lidar/').replace('.bin', '.npy')
-            label_lidar = np.load(label_lidar_path)
-            # lidar_data = lidar_data[lidar_data[:,2]>-0.4]
-            range_intensity_map = create_range_map(lidar_data, label_lidar, image_rows_full = image_rows, image_cols = image_cols, ang_start_y = ang_start_y, ang_res_y = ang_res_y, ang_res_x = ang_res_x, max_range = max_range, min_range = min_range)
+            range_intensity_map = create_range_map(lidar_data, image_rows_full = image_rows, image_cols = image_cols, ang_start_y = ang_start_y, ang_res_y = ang_res_y, ang_res_x = ang_res_x, max_range = max_range, min_range = min_range)
             np.save(os.path.join(output_dir_name_val,'{:08d}.npy'.format(j)), range_intensity_map.astype(np.float32))
-            
+
+    
 
 if __name__ == "__main__":
     args = read_args()
