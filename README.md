@@ -20,9 +20,31 @@ pip install git+'https://github.com/otaheri/chamfer_distance'  # need access to 
 You can refer to more details about chamfer distance package from https://github.com/otaheri/chamfer_distance
 
 ## TransLiDAR Dataset 
-The TransLiDAR dataset is collected using an autonomous vehicle platform equipped with two types of LiDAR sensors: an Ouster 64-line mechanical LiDAR mounted on the roof and a Livox hybrid solid-state LiDAR mounted at the front of the vehicle, as shown in Figure 1. Data collection takes place on a university campus, where 12 routes are designed to comprehensively cover the entire area, as illustrated in Figure 2. In total, the dataset contains 15,641 pairs of point cloud data. Each pair includes a frame of synchronized point clouds from both the mechanical LiDAR and the hybrid solid-state LiDAR. Detailed information is provided in Table 1.
+The TransLiDAR dataset is collected using an autonomous vehicle platform equipped with two types of LiDAR sensors: an Ouster 64-line mechanical LiDAR mounted on the roof and a Livox hybrid solid-state LiDAR mounted at the front of the vehicle, as shown in Fig. 1. Data collection takes place on a university campus, where 12 routes are designed to comprehensively cover the entire area, as illustrated in Fig. 2. In total, the dataset contains 15,641 pairs of point cloud data. Each pair includes a frame of synchronized point clouds from both the mechanical LiDAR and the hybrid solid-state LiDAR. Detailed information is provided in Table 1.
 
-<img src="figures/fig1.jpg" alt="figure_1：Dataset directory structure" width="400" height="300"/>
+- **Dataset directory structure** 
+<img src="figures/fig1.jpg" alt="figure_1：Dataset directory structure" width="600" height="400"/>
+
+- **Georegistered poses overlaid on School Map** 
+<img src="figures/fig2.jpg" alt="figure_1：Dataset directory structure" width="600" height="400"/>
+
+**Table 1: Dataset Statistics**
+
+| Sequence | Frames (LiDAR) | Frames (Area Array) | Data Volume |
+|----------|----------------|---------------------|-------------|
+| 00       | 3047           | 3047                | 1.21 GB     |
+| 01       | 1530           | 1530                | 0.55 GB     |
+| 02       | 63             | 63                  | 0.08 GB     |
+| 03       | 1572           | 1572                | 0.57 GB     |
+| 04       | 600            | 600                 | 0.22 GB     |
+| 05       | 600            | 600                 | 0.21 GB     |
+| 06       | 544            | 544                 | 0.21 GB     |
+| 07       | 770            | 770                 | 0.29 GB     |
+| 08       | 3200           | 3200                | 1.17 GB     |
+| 09       | 35             | 35                  | 0.01 GB     |
+| 10       | 910            | 910                 | 1.15 GB     |
+| 11       | 2770           | 2770                | 1.02 GB     |
+
 
 You can download the dataset via Baidu Netdisk using the following link: https://pan.baidu.com/s/1wX8j819NX-fGRABLRTuPPA?pwd=z14b **Extraction code: z14b** 
 The transLiDA dataset should be structured in this way:
@@ -76,59 +98,19 @@ dataset
 ## Training
 We provide some bash files for running the experiment quickly with default settings. 
 ```
-bash bash_scripts/tulip_upsampling_kitti.sh (KITTI)
-bash bash_scripts/tulip_upsampling_carla.sh (CARLA)
-bash bash_scripts/tulip_upsampling_durlar.sh (DurLAR)
+bash bash_scripts/transLiDAR_translation.sh
+
 ```
 
 ## Evaluation
 After the model training is completed, you can find the saved model weights under the `experiment/` directory. By default, the model weights are saved every 100 epochs. Then, run the evaluation code below:
 ```
-bash bash_scripts/tulip_evaluation_kitti.sh (KITTI)
-bash bash_scripts/tulip_evaluation_carla.sh (CARLA)
-bash bash_scripts/tulip_evaluation_durlar.sh (DurLAR)
+bash bash_scripts/transLiDAR_evaluation.sh
+
 ```
 
 ## Citation
 ```
-@inproceedings{yang2024tulip,
-  title={TULIP: Transformer for Upsampling of LiDAR Point Clouds},
-  author={Yang, Bin and Pfreundschuh, Patrick and Siegwart, Roland and Hutter, Marco and Moghadam, Peyman and Patil, Vaishakh},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={15354--15364},
-  year={2024}
-}
+
 ```
-
-
-## 图示信息
-
-- **Dataset directory structure** 
-- ![figure_1：Dataset directory structur](figures/fig1.jpg)
-  
-- **图2：** 地理配准位姿叠加在 CQUPT 地图上  
-  *Figure 2: Georegistered poses overlaid on CQUPTMap*
-
-- **图3：** 采集序列和轨迹的可视化概览  
-  *Figure 3: Qualitative overview of sequences and trajectories*
-
-## 表格信息
-
-**表1：数据集统计信息**  
-*Table 1: Dataset Statistics*
-
-| Sequence | Frames (LiDAR) | Frames (Area Array) | Data Volume |
-|----------|----------------|---------------------|-------------|
-| 00       | 3047           | 3047                | 1.21 GB     |
-| 01       | 1503           | 1503                | 0.55 GB     |
-| 02       | 64             | 64                  | 0.08 GB     |
-| 03       | 1572           | 1572                | 0.57 GB     |
-| 04       | 600            | 600                 | 0.22 GB     |
-| 05       | 600            | 600                 | 0.21 GB     |
-| 06       | 561            | 561                 | 0.21 GB     |
-| 07       | 770            | 770                 | 0.29 GB     |
-| 08       | 3200           | 3200                | 1.17 GB     |
-| 09       | 37             | 37                  | 0.01 GB     |
-| 10       | 910            | 910                 | 1.15 GB     |
-| 11       | 2770           | 2770                | 1.02 GB     |
 
