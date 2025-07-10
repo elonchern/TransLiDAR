@@ -1,6 +1,5 @@
 # TransLiDAR: A dataset and benchmark for Cross-Sensor Point Cloud Translation
-This is an official implementation of the paper [TransLiDAR: A dataset and benchmark for Cross-Sensor Point Cloud
-Translation]
+This is an official implementation of the paper **TransLiDAR: A dataset and benchmark for Cross-Sensor Point Cloud Translation**.
 ## Installation
 Our work is implemented with the following environmental setups:
 * Python == 3.8
@@ -20,13 +19,14 @@ pip install git+'https://github.com/otaheri/chamfer_distance'  # need access to 
 ```
 You can refer to more details about chamfer distance package from https://github.com/otaheri/chamfer_distance
 
-## Data Preparation
+## TransLiDAR Dataset 
 The TransLiDAR dataset is collected using an autonomous vehicle platform equipped with two types of LiDAR sensors: an Ouster 64-line mechanical LiDAR mounted on the roof and a Livox hybrid solid-state LiDAR mounted at the front of the vehicle, as shown in Figure 1. Data collection takes place on a university campus, where 12 routes are designed to comprehensively cover the entire area, as illustrated in Figure 2. In total, the dataset contains 15,641 pairs of point cloud data. Each pair includes a frame of synchronized point clouds from both the mechanical LiDAR and the hybrid solid-state LiDAR. Detailed information is provided in Table 1.
 
+<img src="figures/fig1.jpg" alt="figure_1：Dataset directory structure" width="400" height="300"/>
 
-You can download the dataset via Baidu Netdisk using the following link: https://pan.baidu.com/s/1wX8j819NX-fGRABLRTuPPA?pwd=z14b 提取码: z14b 
+You can download the dataset via Baidu Netdisk using the following link: https://pan.baidu.com/s/1wX8j819NX-fGRABLRTuPPA?pwd=z14b **Extraction code: z14b** 
 The transLiDA dataset should be structured in this way:
-
+```
 TransLiDAR
 │
 ├── sequences                          # The data includes 12 routes.
@@ -49,7 +49,7 @@ TransLiDAR
 │   ├── 01                              # The data of the second route.
 │   ├── ...                             # Additional routes (02 to 10)
 │   └── 11                              # The data of the last route.
-
+```
 
 After downloading the raw dataset, create train and test split for LiDAR upsampling:
 ```
@@ -71,7 +71,7 @@ dataset
        │   00000001.npy
        │   00000002.npy
        │   ...
-
+```
 
 ## Training
 We provide some bash files for running the experiment quickly with default settings. 
@@ -82,7 +82,7 @@ bash bash_scripts/tulip_upsampling_durlar.sh (DurLAR)
 ```
 
 ## Evaluation
-You can download the pretrained models from the [link](https://drive.google.com/file/d/15Ty7sKOrFHhB94vLBJOKasXaz1_DCa8o/view?usp=drive_link) and use them for evaluation.
+After the model training is completed, you can find the saved model weights under the `experiment/` directory. By default, the model weights are saved every 100 epochs. Then, run the evaluation code below:
 ```
 bash bash_scripts/tulip_evaluation_kitti.sh (KITTI)
 bash bash_scripts/tulip_evaluation_carla.sh (CARLA)
