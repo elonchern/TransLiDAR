@@ -22,10 +22,10 @@ You can refer to more details about chamfer distance package from https://github
 ## TransLiDAR Dataset 
 The TransLiDAR dataset is collected using an autonomous vehicle platform equipped with two types of LiDAR sensors: an Ouster 64-line mechanical LiDAR mounted on the roof and a Livox hybrid solid-state LiDAR mounted at the front of the vehicle, as shown in Fig. 1. Data collection takes place on a university campus, where 12 routes are designed to comprehensively cover the entire area, as illustrated in Fig. 2. In total, the dataset contains 15,641 pairs of point cloud data. Each pair includes a frame of synchronized point clouds from both the mechanical LiDAR and the hybrid solid-state LiDAR. Detailed information is provided in Table 1.
 
-- **Dataset directory structure** 
+- **Fig.1 Dataset directory structure** 
 <img src="figures/fig1.jpg" alt="figure_1：Dataset directory structure" width="600" height="400"/>
 
-- **Georegistered poses overlaid on School Map** 
+- **Fig.2 Georegistered poses overlaid on School Map** 
 <img src="figures/fig2.jpg" alt="figure_1：Dataset directory structure" width="600" height="400"/>
 
 **Table 1: Dataset Statistics**
@@ -100,7 +100,7 @@ dataset
 ## TransLiDAR-Net
  we conduct a preliminary exploration of cross-sensor point cloud translation method based on the TransLiDAR dataset. To this end, we propose a network called TransLiDAR-Net, which is designed to translate point clouds captured by hybrid solid-state LiDAR into the style of mechanical LiDAR. As illustrated in Fig. 3, TransLiDAR-Net comprises several key components: a carefully designed dual-branch backbone network, a foreground-background feature interaction module, a foreground prediction head, a background prediction head, and an output head for final result fusion.  The following introduces the input and output of the network, followed by a detailed description of each individual module.
 
-- **The overview of our TransLiDAR-Net framework** 
+- **Fig.3 The overview of our TransLiDAR-Net framework** 
 <img src="figures/fig6.jpg" alt="figure_1：The overview of our TransLiDAR-Net framework" width="1000" height="400"/>
 
 ## Training
