@@ -74,13 +74,15 @@ TransLiDAR
 ```
 
 After downloading the raw dataset, create train and test split for LiDAR upsampling:
+
 ```
-bash bash_scripts/create_durlar_dataset.sh
-bash bash_scripts/create_kitti_dataset.sh
-```
-The new dataset should be structured in this way:
+bash bash_scripts/transLiDAR_translation.sh
+
 ```
 
+The new dataset should be structured in this way:
+
+```
 dataset
 │
 └─── TransLiDA
