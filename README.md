@@ -85,7 +85,7 @@ The new dataset should be structured in this way:
 ```
 dataset
 │
-└─── TransLiDA
+└─── TransLiDAR
    │
    └───train
    │   │   00000001.npy
@@ -97,18 +97,22 @@ dataset
        │   ...
 ```
 
+## TransLiDAR-Net
+ we conduct a preliminary exploration of cross-sensor point cloud translation method based on the TransLiDAR dataset. To this end, we propose a network called TransLiDAR-Net, which is designed to translate point clouds captured by hybrid solid-state LiDAR into the style of mechanical LiDAR. As illustrated in Fig. 3, TransLiDAR-Net comprises several key components: a carefully designed dual-branch backbone network, a foreground-background feature interaction module, a foreground prediction head, a background prediction head, and an output head for final result fusion.  The following introduces the input and output of the network, followed by a detailed description of each individual module.
+
+- **The overview of our TransLiDAR-Net framework** 
+<img src="figures/fig6.jpg" alt="figure_1：The overview of our TransLiDAR-Net framework" width="600" height="400"/>
+
 ## Training
 We provide some bash files for running the experiment quickly with default settings. 
 ```
 bash bash_scripts/transLiDAR_translation.sh
-
 ```
 
 ## Evaluation
 After the model training is completed, you can find the saved model weights under the `experiment/` directory. By default, the model weights are saved every 100 epochs. Then, run the evaluation code below:
 ```
 bash bash_scripts/transLiDAR_evaluation.sh
-
 ```
 
 ## Citation
